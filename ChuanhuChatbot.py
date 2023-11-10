@@ -16,7 +16,45 @@ from modules.config import *
 from modules import config
 import gradio as gr
 import colorama
+# 数据库
+from modules.mysql_connctor import MySQLConnctor
+def auth(username, password):
+        authorized = False
+        db = MySQLConnctor(host=db_host,user=db_user,password=db_password,database=db_database)
+        result = db.findone("SELECT id,username,password,status FROM app_chatgpt_user WHERE username = %s", (username,))
+        db.close
+        if result is None:
+            return authorized
+        if result[3] != 1:
+            return authorized
+        m = hashlib.md5()
+        m.update(password.encode('utf-8'))
+        enPassword = m.hexdigest()
+        if enPassword == result[2]:
+            authorized = True
+        return authorized
 
+def getDetail(username):
+    db = MySQLConnctor(host=db_host,user=db_user,password=db_password,database=db_database)
+    result = db.findone("SELECT id,username,models,default_model,status FROM app_chatgpt_user WHERE username = %s", (username,))
+    db.close
+    return result
+
+def getUserModels(username):
+    userInfo = getDetail(username=username)
+    print(userInfo)
+    models = []
+    default_model = MODELS[DEFAULT_MODEL]
+    if userInfo is None:
+        models = []
+    else:
+        if userInfo[2] == "all":
+            models = MODELS
+        else:
+            models = userInfo[2].split(',')
+        if userInfo[3] != "":
+            default_model = userInfo[3]
+    return models, default_model
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
@@ -491,21 +529,25 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
             logging.info(f"Get User Name: {request.username}")
             user_info, user_name = gr.Markdown.update(
                 value=f"User: {request.username}"), request.username
+            userModels,defaultModel = getUserModels(request.username)
         else:
             user_info, user_name = gr.Markdown.update(
                 value=f"", visible=False), ""
+            userModels = []
+            defaultModel = MODELS[DEFAULT_MODEL]
         current_model = get_model(
             model_name=MODELS[DEFAULT_MODEL], access_key=my_api_key)[0]
         current_model.set_user_identifier(user_name)
+        model_select_dropdown = gr.Dropdown.update(value=defaultModel, choices=userModels)
         if not hide_history_when_not_logged_in or user_name:
             filename, system_prompt, chatbot = current_model.auto_load()
         else:
             system_prompt = gr.update()
             filename = gr.update()
             chatbot = gr.Chatbot.update(label=MODELS[DEFAULT_MODEL])
-        return user_info, user_name, current_model, toggle_like_btn_visibility(DEFAULT_MODEL), filename, system_prompt, chatbot, init_history_list(user_name)
+        return user_info, user_name, current_model, toggle_like_btn_visibility(DEFAULT_MODEL), filename, system_prompt, chatbot, init_history_list(user_name),model_select_dropdown
     demo.load(create_greeting, inputs=None, outputs=[
-              user_info, user_name, current_model, like_dislike_area, saveFileName, systemPromptTxt, chatbot, historySelectList], api_name="load")
+              user_info, user_name, current_model, like_dislike_area, saveFileName, systemPromptTxt, chatbot, historySelectList,model_select_dropdown], api_name="load")
     chatgpt_predict_args = dict(
         fn=predict,
         inputs=[
@@ -792,7 +834,7 @@ logging.info(
     + colorama.Style.RESET_ALL
 )
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
-demo.title = i18n("川虎Chat 🚀")
+demo.title = i18n("九吨Chat 🚀")
 
 if __name__ == "__main__":
     reload_javascript()
@@ -801,7 +843,7 @@ if __name__ == "__main__":
         server_name=server_name,
         server_port=server_port,
         share=share,
-        auth=auth_from_conf if authflag else None,
+        auth=auth,
         favicon_path="./web_assets/favicon.ico",
         inbrowser=not dockerflag,  # 禁止在docker下开启inbrowser
     )
