@@ -3,7 +3,7 @@
   简体中文 | <a title="English" href="./readme/README_en.md">English</a> | <a title="Japanese" href="./readme/README_ja.md">日本語</a> | <a title="Russian" href="./readme/README_ru.md">Russian</a>
 </div>
 
-<h1 align="center">川虎 Chat 🐯 Chuanhu Chat</h1>
+<h1 align="center">九吨 Chat 🐯 Chuanhu Chat</h1>
 <div align="center">
   <a href="https://github.com/GaiZhenBiao/ChuanhuChatGPT">
     <img src="https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/70903329/aca3a7ec-4f1d-4667-890c-a6f47bf08f63" alt="Logo" height="156">
@@ -55,7 +55,7 @@
 
 <sup>New!</sup> 现在可以让大模型自动命名历史记录（需在设置或配置文件中开启）。
 
-<sup>New!</sup> 现在可以将 川虎Chat 作为 PWA 应用程序安装，体验更加原生！支持 Chrome/Edge/Safari 等浏览器。
+<sup>New!</sup> 现在可以将 九吨Chat 作为 PWA 应用程序安装，体验更加原生！支持 Chrome/Edge/Safari 等浏览器。
 
 <sup>New!</sup> 图标适配各个平台，看起来更舒服。
 
@@ -79,14 +79,14 @@
 ## 使用技巧
 
 ### 💪 强力功能
-- **川虎助理**：类似 AutoGPT，全自动解决你的问题；
+- **九吨助理**：类似 AutoGPT，全自动解决你的问题；
 - **在线搜索**：ChatGPT 的数据太旧？给 LLM 插上网络的翅膀；
 - **知识库**：让 ChatGPT 帮你量子速读！根据文件回答问题。
 - **本地部署LLM**：一键部署，获取属于你自己的大语言模型。
 
 ### 🤖 System Prompt
 - 通过 System Prompt 设定前提条件，可以很有效地进行角色扮演；
-- 川虎Chat 预设了Prompt模板，点击`加载Prompt模板`，先选择 Prompt 模板集合，然后在下方选择想要的 Prompt。
+- 九吨Chat 预设了Prompt模板，点击`加载Prompt模板`，先选择 Prompt 模板集合，然后在下方选择想要的 Prompt。
 
 ### 💬 基础对话
 - 如果回答不满意，可以使用 `重新生成` 按钮再试一次，或者直接 `删除这轮对话`;
@@ -139,7 +139,7 @@ pip install -r requirements.txt
 python ChuanhuChatbot.py
 ```
 
-一个浏览器窗口将会自动打开，此时您将可以使用 **川虎Chat** 与ChatGPT或其他模型进行对话。
+一个浏览器窗口将会自动打开，此时您将可以使用 **九吨Chat** 与ChatGPT或其他模型进行对话。
 
 > **Note**
 >
