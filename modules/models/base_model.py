@@ -78,7 +78,7 @@ def get_action_description(text):
     action_name = json_dict['action']
     action_input = json_dict['action_input']
     if action_name != "Final Answer":
-        return f'<!-- S O PREFIX --><p class="agent-prefix">{action_name}: {action_input}\n\n</p><!-- E O PREFIX -->'
+        return f'<!-- S O PREFIX --><p class="agent-prefix">{action_name}: {action_input}\n</p><!-- E O PREFIX -->'
     else:
         return ""
 
@@ -148,6 +148,7 @@ class ModelType(Enum):
     Claude = 14
     Qwen = 15
     OpenAIVision = 16
+    ERNIE = 17
 
     @classmethod
     def get_type(cls, model_name: str):
@@ -188,6 +189,8 @@ class ModelType(Enum):
             model_type = ModelType.Claude
         elif "qwen" in model_name_lower:
             model_type = ModelType.Qwen
+        elif "ernie" in model_name_lower:
+            model_type = ModelType.ERNIE
         else:
             model_type = ModelType.LLaMA
         return model_type
@@ -210,7 +213,10 @@ class BaseLLMModel:
     ) -> None:
         self.history = []
         self.all_token_counts = []
-        self.model_name = model_name
+        if model_name in MODEL_METADATA:
+            self.model_name = MODEL_METADATA[model_name]["model_name"]
+        else:
+            self.model_name = model_name
         self.model_type = ModelType.get_type(model_name)
         try:
             self.token_upper_limit = MODEL_METADATA[model_name]["token_limit"]
@@ -373,8 +379,9 @@ class BaseLLMModel:
             msg = "索引获取成功，生成回答中……"
             logging.info(msg)
             with retrieve_proxy():
-                retriever = VectorStoreRetriever(vectorstore=index, search_type="similarity_score_threshold", search_kwargs={
-                                                 "k": 6, "score_threshold": 0.5})
+                retriever = VectorStoreRetriever(vectorstore=index, search_type="similarity", search_kwargs={"k": 6})
+                # retriever = VectorStoreRetriever(vectorstore=index, search_type="similarity_score_threshold", search_kwargs={
+                #                                  "k": 6, "score_threshold": 0.2})
                 try:
                     relevant_documents = retriever.get_relevant_documents(
                         fake_inputs)
@@ -787,7 +794,7 @@ class BaseLLMModel:
                     logging.info(new_history)
             except:
                 pass
-            if len(json_s["chatbot"]) < len(json_s["history"]):
+            if len(json_s["chatbot"]) < len(json_s["history"])//2:
                 logging.info("Trimming corrupted history...")
                 json_s["history"] = json_s["history"][-len(json_s["chatbot"]):]
                 logging.info(f"Trimmed history: {json_s['history']}")
@@ -810,8 +817,10 @@ class BaseLLMModel:
             history_file_path = os.path.join(HISTORY_DIR, user_name, filename)
         else:
             history_file_path = filename
+        md_history_file_path = history_file_path[:-5] + ".md"
         try:
             os.remove(history_file_path)
+            os.remove(md_history_file_path)
             return i18n("删除对话历史成功"), get_history_list(user_name), []
         except:
             logging.info(f"删除对话历史失败 {history_file_path}")

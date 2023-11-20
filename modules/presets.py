@@ -56,6 +56,7 @@ ONLINE_MODELS = [
     "GPT3.5 Turbo 16K",
     "GPT3.5 Turbo 0301",
     "GPT3.5 Turbo 0613",
+    "GPT3.5 Turbo 1106",
     "GPT4",
     "GPT4 32K",
     "GPT4 Turbo",
@@ -74,7 +75,10 @@ ONLINE_MODELS = [
     "讯飞星火大模型V3.0",
     "讯飞星火大模型V2.0",
     "讯飞星火大模型V1.5",
-    "Claude"
+    "Claude",
+    "ERNIE-Bot-turbo",
+    "ERNIE-Bot",
+    "ERNIE-Bot-4",
 ]
 
 LOCAL_MODELS = [
@@ -126,6 +130,10 @@ MODEL_METADATA = {
         "model_name": "gpt-3.5-turbo-0613",
         "token_limit": 4096,
     },
+    "GPT3.5 Turbo 1106": {
+    "model_name": "gpt-3.5-turbo-1106",
+    "token_limit": 16384,
+    },
     "GPT4": {
         "model_name": "gpt-4",
         "token_limit": 8192,
@@ -145,6 +153,18 @@ MODEL_METADATA = {
     "Claude": {
         "model_name": "Claude",
         "token_limit": 4096,
+    },
+    "ERNIE-Bot-turbo": {
+        "model_name": "ERNIE-Bot-turbo",
+        "token_limit": 1024,
+    },
+    "ERNIE-Bot": {
+        "model_name": "ERNIE-Bot",
+        "token_limit": 1024,
+    },
+    "ERNIE-Bot-4": {
+        "model_name": "ERNIE-Bot-4",
+        "token_limit": 1024,
     },
 }
 

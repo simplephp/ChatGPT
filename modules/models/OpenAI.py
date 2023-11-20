@@ -26,7 +26,7 @@ class OpenAIClient(BaseLLMModel):
         user_name=""
     ) -> None:
         super().__init__(
-            model_name=MODEL_METADATA[model_name]["model_name"],
+            model_name=model_name,
             temperature=temperature,
             top_p=top_p,
             system_prompt=system_prompt,

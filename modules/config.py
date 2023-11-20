@@ -98,6 +98,10 @@ else:
     sensitive_id = config.get("sensitive_id", "")
     sensitive_id = os.environ.get("SENSITIVE_ID", sensitive_id)
 
+if "available_models" in config:
+    presets.MODELS = config["available_models"]
+    logging.info(f"已设置可用模型：{config['available_models']}")
+
 # 模型配置
 if "extra_models" in  config:
     presets.MODELS.extend(config["extra_models"])
@@ -134,6 +138,11 @@ os.environ["SPARK_API_SECRET"] = spark_api_secret
 
 claude_api_secret = config.get("claude_api_secret", "")
 os.environ["CLAUDE_API_SECRET"] = claude_api_secret
+
+ernie_api_key = config.get("ernie_api_key", "")
+os.environ["ERNIE_APIKEY"] = ernie_api_key
+ernie_secret_key = config.get("ernie_secret_key", "")
+os.environ["ERNIE_SECRETKEY"] = ernie_secret_key
 
 load_config_to_environ(["openai_api_type", "azure_openai_api_key", "azure_openai_api_base_url",
                        "azure_openai_api_version", "azure_deployment_name", "azure_embedding_deployment_name", "azure_embedding_model_name"])

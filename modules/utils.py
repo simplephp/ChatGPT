@@ -211,18 +211,16 @@ def clip_rawtext(chat_message, need_escape=True):
     hr_match = re.search(hr_pattern, chat_message, re.DOTALL)
     message_clipped = chat_message[:hr_match.start()] if hr_match else chat_message
     # second, avoid agent-prefix being escaped
-    agent_prefix_pattern = r'<!-- S O PREFIX --><p class="agent-prefix">(.*?)<\/p><!-- E O PREFIX -->'
-    agent_matches = re.findall(agent_prefix_pattern, message_clipped)
+    agent_prefix_pattern = r'(<!-- S O PREFIX --><p class="agent-prefix">.*?<\/p><!-- E O PREFIX -->)'
+    # agent_matches = re.findall(agent_prefix_pattern, message_clipped)
+    agent_parts = re.split(agent_prefix_pattern, message_clipped, flags=re.DOTALL)
     final_message = ""
-    if agent_matches:
-        agent_parts = re.split(agent_prefix_pattern, message_clipped)
-        for i, part in enumerate(agent_parts):
-            if i % 2 == 0:
-                final_message += escape_markdown(part) if need_escape else part
-            else:
-                final_message += f'<!-- S O PREFIX --><p class="agent-prefix">{part}</p><!-- E O PREFIX -->'
-    else:
-        final_message = escape_markdown(message_clipped) if need_escape else message_clipped
+    for i, part in enumerate(agent_parts):
+        if i % 2 == 0:
+            if part != "" and part != "\n":
+                final_message += f'<pre class="fake-pre">{escape_markdown(part)}</pre>' if need_escape else f'<pre class="fake-pre">{part}</pre>'
+        else:
+            final_message += part
     return final_message
 
 
@@ -233,7 +231,7 @@ def convert_bot_before_marked(chat_message):
     if '<div class="md-message">' in chat_message:
         return chat_message
     else:
-        raw = f'<div class="raw-message hideM"><pre>{clip_rawtext(chat_message)}</pre></div>'
+        raw = f'<div class="raw-message hideM">{clip_rawtext(chat_message)}</div>'
         # really_raw = f'{START_OF_OUTPUT_MARK}<div class="really-raw hideM">{clip_rawtext(chat_message, need_escape=False)}\n</div>{END_OF_OUTPUT_MARK}'
 
         code_block_pattern = re.compile(r"```(.*?)(?:```|$)", re.DOTALL)
@@ -660,6 +658,15 @@ def toggle_like_btn_visibility(selected_model_name):
         return gr.update(visible=True)
     else:
         return gr.update(visible=False)
+
+def get_corresponding_file_type_by_model_name(selected_model_name):
+    if selected_model_name in ["xmchat", "GPT4 Vision"]:
+        return ["image"]
+    else:
+        return [".pdf", ".docx", ".pptx", ".epub", ".xlsx", ".txt", "text"]
+
+# def toggle_file_type(selected_model_name):
+#     return gr.Files.update(file_types=get_corresponding_file_type_by_model_name(selected_model_name))
 
 def new_auto_history_filename(username):
     latest_file = get_first_history_name(username)
