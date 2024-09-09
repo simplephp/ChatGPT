@@ -76,11 +76,11 @@ def getDbConnection():
         # 配置连接信息
         # host=db_host,user=db_user,password=db_password,database=db_database
         conn = mysql.connector.connect(
-            host=db_host,
+            host=config.db_host,
             port=3306,
-            user=db_user,
-            password=db_password,
-            database=db_database
+            user=config.db_user,
+            password=config.db_password,
+            database=config.db_database
         )
     # 捕获异常
     except mysql.connector.Error as err:
