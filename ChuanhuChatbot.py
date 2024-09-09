@@ -17,13 +17,27 @@ from modules import config
 import gradio as gr
 import colorama
 
+
 # 查询用户和加载用户模型
-from modules.mysql_connctor import MySQLConnctor
+import mysql.connector
 def auth(username, password):
         authorized = False
-        db = MySQLConnctor(host=db_host,user=db_user,password=db_password,database=db_database)
-        result = db.findone("SELECT id,username,password,status FROM app_chatgpt_user WHERE username = %s", (username,))
-        db.close
+        connection = getDbConnection()
+        if None == connection:
+            return authorized
+        cursor = connection.cursor()
+        sql = '"SELECT id,username,password,status FROM app_chatgpt_user WHERE username = %s'
+        param = (username,)
+        cursor.execute(sql, param)
+        result = cursor.fetchall()
+
+        # 打印结果
+        for row in result:
+            print(row)
+
+        # 关闭游标和数据库连接
+        cursor.close()
+        connection.close()
         if result is None:
             return authorized
         if result[3] != 1:
@@ -56,6 +70,30 @@ def getUserModels(username):
         if userInfo[3] != "":
             default_model = userInfo[3]
     return models, default_model
+
+def getDbConnection():
+    try:
+        # 配置连接信息
+        # host=db_host,user=db_user,password=db_password,database=db_database
+        conn = mysql.connector.connect(
+            host=db_host,
+            port=3306,
+            user=db_user,
+            password=db_password,
+            database=db_database
+        )
+    # 捕获异常
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print('账号或密码错误！')
+            return None
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print('数据库不存在！')
+            return None
+        else:
+            return None
+    else:
+        return conn
 # 查询用户和加载用户模型
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
