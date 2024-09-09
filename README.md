@@ -1,9 +1,9 @@
 <div align="right">
   <!-- 语言: -->
-  简体中文 | <a title="English" href="./readme/README_en.md">English</a> | <a title="Japanese" href="./readme/README_ja.md">日本語</a> | <a title="Russian" href="./readme/README_ru.md">Russian</a>
+  简体中文 | <a title="English" href="./readme/README_en.md">English</a> | <a title="Japanese" href="./readme/README_ja.md">日本語</a> | <a title="Russian" href="./readme/README_ru.md">Russian</a> | <a title="Korean" href="./readme/README_ko.md">한국어</a>
 </div>
 
-<h1 align="center">九吨 Chat 🐯 Chuanhu Chat</h1>
+<h1 align="center">川虎 Chat 🐯 Chuanhu Chat</h1>
 <div align="center">
   <a href="https://github.com/GaiZhenBiao/ChuanhuChatGPT">
     <img src="https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/70903329/aca3a7ec-4f1d-4667-890c-a6f47bf08f63" alt="Logo" height="156">
@@ -39,8 +39,8 @@
 
 ## 目录
 
-| [支持模型](#支持模型) | [使用技巧](#使用技巧) | [安装方式](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程) | [常见问题](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/常见问题) | [给作者买可乐🥤](#捐款) |
-| --- | --- | --- | --- | --- |
+| [支持模型](#支持模型) | [使用技巧](#使用技巧) | [安装方式](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程) | [常见问题](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/常见问题) | [给作者买可乐🥤](#捐款) | [加入Telegram群组](https://t.me/tkdifferent) |
+| --- | --- | --- | --- | --- | --- |
 
 ## ✨ 5.0 重磅更新！
 
@@ -55,7 +55,7 @@
 
 <sup>New!</sup> 现在可以让大模型自动命名历史记录（需在设置或配置文件中开启）。
 
-<sup>New!</sup> 现在可以将 九吨Chat 作为 PWA 应用程序安装，体验更加原生！支持 Chrome/Edge/Safari 等浏览器。
+<sup>New!</sup> 现在可以将 川虎Chat 作为 PWA 应用程序安装，体验更加原生！支持 Chrome/Edge/Safari 等浏览器。
 
 <sup>New!</sup> 图标适配各个平台，看起来更舒服。
 
@@ -66,27 +66,30 @@
 
 | API 调用模型 | 备注 | 本地部署模型 | 备注 |
 | :---: | --- | :---: | --- |
-| [ChatGPT(GPT-4)](https://chat.openai.com) | 支持微调 gpt-3.5 | [ChatGLM](https://github.com/THUDM/ChatGLM-6B) ([ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)) |
-| [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) |  | [LLaMA](https://github.com/facebookresearch/llama) | 支持 Lora 模型 
-| [Google PaLM](https://developers.generativeai.google/products/palm) | 不支持流式传输 | [StableLM](https://github.com/Stability-AI/StableLM)
-| [讯飞星火认知大模型](https://xinghuo.xfyun.cn) |  | [MOSS](https://github.com/OpenLMLab/MOSS)
-| [Inspur Yuan 1.0](https://air.inspur.com/home) |  | [通义千问](https://github.com/QwenLM/Qwen/tree/main)
-| [MiniMax](https://api.minimax.chat/) |
-| [XMChat](https://github.com/MILVLG/xmchat) | 不支持流式传输
-| [Midjourney](https://www.midjourney.com/) | 不支持流式传输
-| [Claude](https://www.anthropic.com/) |
+| [ChatGPT(GPT-4、GPT-4o)](https://chat.openai.com) | 支持微调 gpt-3.5 | [ChatGLM](https://github.com/THUDM/ChatGLM-6B) ([ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)) ([ChatGLM3](https://huggingface.co/THUDM/chatglm3-6b)) ||
+| [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) |  | [LLaMA](https://github.com/facebookresearch/llama) | 支持 Lora 模型 |
+| [Google Gemini Pro](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn) |  | [StableLM](https://github.com/Stability-AI/StableLM) ||
+| [讯飞星火认知大模型](https://xinghuo.xfyun.cn) |  | [MOSS](https://github.com/OpenLMLab/MOSS) ||
+| [Inspur Yuan 1.0](https://air.inspur.com/home) |  | [通义千问](https://github.com/QwenLM/Qwen/tree/main) ||
+| [MiniMax](https://api.minimax.chat/) ||||
+| [XMChat](https://github.com/MILVLG/xmchat) | 不支持流式传输|||
+| [Midjourney](https://www.midjourney.com/) | 不支持流式传输|||
+| [Claude](https://www.anthropic.com/) | ✨ 现已支持Claude 3 Opus、Sonnet，Haiku将会在推出后的第一时间支持|||
+| DALL·E 3 ||||
 
 ## 使用技巧
 
 ### 💪 强力功能
-- **九吨助理**：类似 AutoGPT，全自动解决你的问题；
+- **川虎助理**：类似 AutoGPT，全自动解决你的问题；
 - **在线搜索**：ChatGPT 的数据太旧？给 LLM 插上网络的翅膀；
 - **知识库**：让 ChatGPT 帮你量子速读！根据文件回答问题。
 - **本地部署LLM**：一键部署，获取属于你自己的大语言模型。
+- **GPT 3.5微调**：支持微调 GPT 3.5，让 ChatGPT 更加个性化。
+- **[自定义模型](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B-Custom-Models)**：灵活地自定义模型，例如对接本地推理服务。
 
 ### 🤖 System Prompt
 - 通过 System Prompt 设定前提条件，可以很有效地进行角色扮演；
-- 九吨Chat 预设了Prompt模板，点击`加载Prompt模板`，先选择 Prompt 模板集合，然后在下方选择想要的 Prompt。
+- 川虎Chat 预设了Prompt模板，点击`加载Prompt模板`，先选择 Prompt 模板集合，然后在下方选择想要的 Prompt。
 
 ### 💬 基础对话
 - 如果回答不满意，可以使用 `重新生成` 按钮再试一次，或者直接 `删除这轮对话`;
@@ -139,7 +142,7 @@ pip install -r requirements.txt
 python ChuanhuChatbot.py
 ```
 
-一个浏览器窗口将会自动打开，此时您将可以使用 **九吨Chat** 与ChatGPT或其他模型进行对话。
+一个浏览器窗口将会自动打开，此时您将可以使用 **川虎Chat** 与ChatGPT或其他模型进行对话。
 
 > **Note**
 >

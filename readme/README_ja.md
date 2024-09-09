@@ -1,9 +1,9 @@
 <div align="right">
   <!-- Language: -->
-  <a title="Chinese" href="../README.md">简体中文</a> | <a title="English" href="README_en.md">English</a> | 日本語 |  <a title="Russian" href="README_ru.md">Russian</a>
+  <a title="Chinese" href="../README.md">简体中文</a> | <a title="English" href="README_en.md">English</a> | 日本語 |  <a title="Russian" href="README_ru.md">Russian</a> | <a title="Korean" href="README_ko.md">한국어</a>
 </div>
 
-<h1 align="center">九吨 Chat 🐯 Chuanhu Chat</h1>
+<h1 align="center">川虎 Chat 🐯 Chuanhu Chat</h1>
 <div align="center">
   <a href="https://github.com/GaiZhenBiao/ChuanhuChatGPT">
     <img src="https://github.com/GaiZhenbiao/ChuanhuChatGPT/assets/70903329/aca3a7ec-4f1d-4667-890c-a6f47bf08f63" alt="Logo" height="156">
@@ -51,7 +51,7 @@
 
 <sup>新!</sup> 大きなモデルによる履歴の自動命名が可能になりました（設定または設定ファイルで有効化が必要）。
 
-<sup>新!</sup> 今では 九吨チャット を PWAアプリケーションとしてインストールすることも可能で、よりネイティブな体験ができます！Chrome/Edge/Safariなどのブラウザをサポート。
+<sup>新!</sup> 今では 川虎チャット を PWAアプリケーションとしてインストールすることも可能で、よりネイティブな体験ができます！Chrome/Edge/Safariなどのブラウザをサポート。
 
 <sup>新!</sup> 各プラットフォームに適したアイコンで、見ていても気持ちがいい。
 
@@ -61,27 +61,29 @@
 
 | API呼び出しモデル | 備考 | ローカルデプロイモデル | 備考 |
 | :---: | --- | :---: | --- |
-| [ChatGPT(GPT-4)](https://chat.openai.com) | gpt-3.5の微調整をサポート | [ChatGLM](https://github.com/THUDM/ChatGLM-6B) ([ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)) |
-| [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) |  | [LLaMA](https://github.com/facebookresearch/llama) | Loraモデルのサポートあり 
-| [Google PaLM](https://developers.generativeai.google/products/palm) | ストリーミング転送はサポートされていません | [StableLM](https://github.com/Stability-AI/StableLM)
-| [讯飞星火认知大模型](https://xinghuo.xfyun.cn) |  | [MOSS](https://github.com/OpenLMLab/MOSS)
-| [Inspur Yuan 1.0](https://air.inspur.com/home) |  | [Qwen](https://github.com/QwenLM/Qwen/tree/main)
-| [MiniMax](https://api.minimax.chat/) |
-| [XMChat](https://github.com/MILVLG/xmchat) | ストリーミング転送はサポートされていません
-| [Midjourney](https://www.midjourney.com/) | ストリーミング転送はサポートされていません
-| [Claude](https://www.anthropic.com/) |
+| [ChatGPT(GPT-4、GPT-4o)](https://chat.openai.com) | gpt-3.5の微調整をサポート | [ChatGLM](https://github.com/THUDM/ChatGLM-6B) ([ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)) ([ChatGLM3](https://huggingface.co/THUDM/chatglm3-6b)) ||
+| [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) |  | [LLaMA](https://github.com/facebookresearch/llama) | Loraモデルのサポートあり |
+| [Google Gemini Pro](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn) |  | [StableLM](https://github.com/Stability-AI/StableLM)||
+| [讯飞星火认知大模型](https://xinghuo.xfyun.cn) |  | [MOSS](https://github.com/OpenLMLab/MOSS)||
+| [Inspur Yuan 1.0](https://air.inspur.com/home) |  | [Qwen](https://github.com/QwenLM/Qwen/tree/main)||
+| [MiniMax](https://api.minimax.chat/) ||||
+| [XMChat](https://github.com/MILVLG/xmchat) | ストリーミング転送はサポートされていません|||
+| [Midjourney](https://www.midjourney.com/) | ストリーミング転送はサポートされていません|||
+| [Claude](https://www.anthropic.com/) ||||
 
 ## 使う上でのTips
 
 ### 💪 パワフルな機能
-- **九吨助理**：AutoGPTに似ており、自動的に問題を解決します。
+- **川虎助理**：AutoGPTに似ており、自動的に問題を解決します。
 - **オンライン検索**：ChatGPTのデータが古い場合は、LLMにネットワークの翼を付けます。
 - **ナレッジベース**：ChatGPTがあなたをクイックリーディングの世界へご招待！ファイルに基づいて質問に答えます。
 - **LLMのローカルデプロイ**：ワンクリックであなた自身の大規模言語モデルをデプロイします。
+- **GPT 3.5微調整**：ChatGPTをよりパーソナライズするためのGPT 3.5の微調整をサポートします。
+- **[カスタムモデル](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B-Custom-Models)**：例えば、ローカル推論サービスに接続するなど、モデルを柔軟にカスタマイズします。
 
 ### 🤖 システムプロンプト
 - システムプロンプトを使用して前提条件を設定すると、ロールプレイが効果的に行えます。
-- 九吨Chatはプロンプトテンプレートを予め設定しており、「プロンプトテンプレートを読み込む」をクリックして、まずプロンプトテンプレートコレクションを選択し、次に下部で希望のプロンプトを選択します。
+- 川虎Chatはプロンプトテンプレートを予め設定しており、「プロンプトテンプレートを読み込む」をクリックして、まずプロンプトテンプレートコレクションを選択し、次に下部で希望のプロンプトを選択します。
 
 ### 💬 ベーシックな対話
 - もし回答が満足できない場合、「再生成」ボタンを使用して再試行するか、直接「このラウンドの対話を削除」することができます。
