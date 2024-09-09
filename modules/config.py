@@ -35,6 +35,10 @@ __all__ = [
     "chat_name_method_index",
     "HIDE_MY_KEY",
     "hfspaceflag",
+    "db_host",
+    "db_user",
+    "db_password",
+    "db_database",
 ]
 
 # 添加一个统一的config文件，避免文件过多造成的疑惑（优先级最低）
