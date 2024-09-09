@@ -912,7 +912,7 @@ if __name__ == "__main__":
         server_name=server_name,
         server_port=server_port,
         share=share,
-        auth=False,
+        auth=auth,
         favicon_path="./web_assets/favicon.ico",
         inbrowser=autobrowser and not dockerflag,  # 禁止在docker下开启inbrowser
     )
