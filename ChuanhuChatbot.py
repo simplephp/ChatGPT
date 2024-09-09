@@ -30,11 +30,6 @@ def auth(username, password):
         param = (username,)
         cursor.execute(sql, param)
         result = cursor.fetchone()
-
-        # 打印结果
-        for row in result:
-            print(row)
-
         # 关闭游标和数据库连接
         cursor.close()
         connection.close()
@@ -45,6 +40,8 @@ def auth(username, password):
         m = hashlib.md5()
         m.update(password.encode('utf-8'))
         enPassword = m.hexdigest()
+        print(enPassword)
+        print(result[2])
         if enPassword == result[2]:
             authorized = True
         return authorized
