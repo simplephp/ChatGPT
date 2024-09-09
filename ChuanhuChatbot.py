@@ -29,7 +29,7 @@ def auth(username, password):
         sql = "SELECT id,username,password,status FROM app_chatgpt_user WHERE username = %s"
         param = (username,)
         cursor.execute(sql, param)
-        result = cursor.fetchall()
+        result = cursor.fetchone()
 
         # 打印结果
         for row in result:
