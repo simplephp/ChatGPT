@@ -44,6 +44,7 @@ def auth(username, password):
         print(result[2])
         if enPassword == result[2]:
             authorized = True
+        print(authorized)
         return authorized
 
 def getDetail(username):
