@@ -48,9 +48,16 @@ def auth(username, password):
         return authorized
 
 def getDetail(username):
-    db = MySQLConnctor(host=db_host,user=db_user,password=db_password,database=db_database)
-    result = db.findone("SELECT id,username,models,default_model,status FROM app_chatgpt_user WHERE username = %s", (username,))
-    db.close
+    connection = getDbConnection()
+    if None == connection:
+        return None
+    cursor = connection.cursor()
+    sql = "SELECT id,username,models,default_model,status FROM app_chatgpt_user WHERE username = %s"
+    param = (username,)
+    cursor.execute(sql, param)
+    result = cursor.fetchone()
+    cursor.close()
+    connection.close()
     return result
 
 def getUserModels(username):
