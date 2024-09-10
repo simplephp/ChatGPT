@@ -39,8 +39,6 @@ def auth(username, password):
         m = hashlib.md5()
         m.update(password.encode('utf-8'))
         enPassword = m.hexdigest()
-        print(enPassword)
-        print(result[2])
         if enPassword == result[2]:
             authorized = True
         print(authorized)
@@ -61,7 +59,6 @@ def getDetail(username):
 
 def getUserModels(username):
     userInfo = getDetail(username=username)
-    print(userInfo)
     models = []
     default_model = MODELS[DEFAULT_MODEL]
     if userInfo is None:
