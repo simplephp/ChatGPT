@@ -510,7 +510,7 @@ let ChuanhuInfo = function () {
 / /___/ / / / /_/ / /_/ / / / / / / / /_/ /  / /___/ / / / /_/ / /_
 \____/_/ /_/\__,_/\__,_/_/ /_/_/ /_/\__,_/   \____/_/ /_/\__,_/\__/
 
-   川虎Chat (Chuanhu Chat) - GUI for ChatGPT API and many LLMs
+   九吨Chat (Chuanhu Chat) - GUI for ChatGPT API and many LLMs
  */
 }
 let description = `

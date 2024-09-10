@@ -1311,12 +1311,12 @@ def setup_wizard():
             ],
             '是否设置机器人头像和用户头像？可填写本地或网络图片链接，或者"none"（不显示头像）。',
         )
-        # 川虎助理
+        # 九吨助理
         wizard.set(
             [
                 ConfigItem(
                     "default_chuanhu_assistant_model",
-                    "川虎助理使用的模型",
+                    "九吨助理使用的模型",
                     type=ConfigType.String,
                     default="gpt-4",
                 ),
@@ -1341,7 +1341,7 @@ def setup_wizard():
                     type=ConfigType.String,
                 ),
             ],
-            "是否设置川虎助理？如果不设置，仍可设置川虎助理。如果设置，可以使用川虎助理Pro模式。",
+            "是否设置九吨助理？如果不设置，仍可设置九吨助理。如果设置，可以使用九吨助理Pro模式。",
         )
         # 文档处理与显示
         wizard.set(
