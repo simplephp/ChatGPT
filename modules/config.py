@@ -35,6 +35,10 @@ __all__ = [
     "chat_name_method_index",
     "HIDE_MY_KEY",
     "hfspaceflag",
+    "db_host",
+    "db_user",
+    "db_password",
+    "db_database",
 ]
 
 # 添加一个统一的config文件，避免文件过多造成的疑惑（优先级最低）
@@ -345,3 +349,9 @@ if user_avatar == "" or user_avatar == "none" or user_avatar is None:
     user_avatar = None
 elif user_avatar == "default":
     user_avatar = "web_assets/user.png"
+
+# 数据库
+db_user = config.get("db_user", "chatgpt")
+db_password = config.get("db_password", "59GoQ7HSDKgRjWiE")
+db_host = config.get("db_host", "127.0.0.1")
+db_database = config.get("db_database", "chatgpt")
