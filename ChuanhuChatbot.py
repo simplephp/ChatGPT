@@ -17,89 +17,6 @@ from modules import config
 import gradio as gr
 import colorama
 
-# 查询用户和加载用户模型
-import mysql.connector
-def auth(username, password):
-        authorized = False
-        connection = getDbConnection()
-        if None == connection:
-            return authorized
-        cursor = connection.cursor()
-        sql = "SELECT id,username,password,status FROM app_chatgpt_user WHERE username = %s"
-        param = (username,)
-        cursor.execute(sql, param)
-        result = cursor.fetchone()
-        # 关闭游标和数据库连接
-        cursor.close()
-        connection.close()
-        if result is None:
-            return authorized
-        if result[3] != 1:
-            return authorized
-        m = hashlib.md5()
-        m.update(password.encode('utf-8'))
-        enPassword = m.hexdigest()
-        print(enPassword)
-        print(result[2])
-        if enPassword == result[2]:
-            authorized = True
-        print(authorized)
-        return authorized
-
-def getDetail(username):
-    connection = getDbConnection()
-    if None == connection:
-        return None
-    cursor = connection.cursor()
-    sql = "SELECT id,username,models,default_model,status FROM app_chatgpt_user WHERE username = %s"
-    param = (username,)
-    cursor.execute(sql, param)
-    result = cursor.fetchone()
-    cursor.close()
-    connection.close()
-    return result
-
-def getUserModels(username):
-    userInfo = getDetail(username=username)
-    print(userInfo)
-    models = []
-    default_model = MODELS[DEFAULT_MODEL]
-    if userInfo is None:
-        models = []
-    else:
-        if userInfo[2] == "all":
-            models = MODELS
-        else:
-            models = userInfo[2].split(',')
-        if userInfo[3] != "":
-            default_model = userInfo[3]
-    return models, default_model
-
-def getDbConnection():
-    try:
-        # 配置连接信息
-        # host=db_host,user=db_user,password=db_password,database=db_database
-        conn = mysql.connector.connect(
-            host=config.db_host,
-            port=3306,
-            user=config.db_user,
-            password=config.db_password,
-            database=config.db_database
-        )
-    # 捕获异常
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print('账号或密码错误！')
-            return None
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print('数据库不存在！')
-            return None
-        else:
-            return None
-    else:
-        return conn
-# 查询用户和加载用户模型
-
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 patch_gradio()
@@ -906,7 +823,7 @@ if __name__ == "__main__":
         server_name=server_name,
         server_port=server_port,
         share=share,
-        auth=auth,
+        auth=auth_from_conf if authflag else None,
         favicon_path="./web_assets/favicon.ico",
         inbrowser=autobrowser and not dockerflag,  # 禁止在docker下开启inbrowser
     )
