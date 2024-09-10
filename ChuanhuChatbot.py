@@ -601,8 +601,11 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
             defaultModel = MODELS[DEFAULT_MODEL]
         current_model = get_model(
             model_name=MODELS[DEFAULT_MODEL], access_key=my_api_key, user_name=user_name)[0]
-        current_model.set_user_identifier(user_name)
-        model_select_dropdown = gr.Dropdown.update(value=defaultModel, choices=userModels)
+
+        model_select_dropdown = gr.Dropdown(
+            label=i18n("选择模型"), choices=userModels, multiselect=False, value=defaultModel, interactive=True,
+            show_label=False, container=False, elem_id="model-select-dropdown", filterable=False
+        )
 
         if not hide_history_when_not_logged_in or user_name:
             loaded_stuff = current_model.auto_load()
